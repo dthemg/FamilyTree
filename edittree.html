@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/main.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<form>
+		<label for="fname">First name:</label>
+		<input type="text" id="fname" name="fname"><br><br>
+		<label for="lname">Last name:</label>
+		<input type="text" id="lname" name="lname"><br><br>
+		<label for="relationship_type">Relationship:</label>
+		<select name="relationship_type" id="relationship_type">
+			<option value="father">Father</option>
+			<option value="mother">Mother</option>
+			<option value="mother">Child</option>
+		</select><br><br>
+		<label for="select_relative">Name:</label>
+		<select id="select_relative" class="js-states form-control" />
+	</form>
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<!-- Select2 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+	<script>
+		var data = {
+			"start": "id1",
+			"persons": {
+				"id1": { "id": "id1", "name": "David Montgomery", "birthyear": 1993, "own_unions": [], "parent_union": "u1" },
+				"id2": { "id": "id2", "name": "Anna Montgomery", "birthyear": 1961, "own_unions": ["u1"] },
+				"id3": { "id": "id3", "name": "Erland Montgomery", "birthyear": 1961, "own_unions": ["u1"] },
+				"id4": { "id": "id4", "name": "Mattias Montgomery", "birthyear": 1990, "own_unions": ["u2"], "parent_union": "u1" },
+				"id5": { "id": "id5", "name": "Kerstin Montgomery", "birthyear": 2020, "own_unions": [], "parent_union": "u2" },
+				"id6": { "id": "id6", "name": "Matilda Montgomery", "birthyear": 1989, "own_unions": ["u2"] },
+				"id7": { "id": "id7", "name": "Valdemar Montgomery", "birthyear": 2022, "own_unions": [], "parent_union": "u2" }
+			},
+			"unions": {
+				"u1": { "id": "u1", "partner": ["id2", "id3"], "children": ["id1", "id4"] },
+				"u2": { "id": "u2", "partner": ["id4", "id6"], "children": ["id5", "id7"] }
+			},
+			"links": [
+				["id2", "u1"],
+				["id3", "u1"],
+				["u1", "id1"],
+				["u1", "id4"],
+				["id4", "u2"],
+				["id6", "u2"],
+				["u2", "id5"],
+				["u2", "id7"]
+			]
+		};
+		var $select_relative = $("#select_relative");
+
+		// Populate options
+		$.each(data.persons, function (i, val) {
+			$select_relative.append($('<option />', { value: val.id, text: val.name }));
+		});
+
+		// Make searchable
+		$select_relative.select2({
+			placeholder: "Type name of relative",
+			allowClear: true
+		});
+	</script>
+</body>
