@@ -7,52 +7,30 @@
 </head>
 
 <body>
-	<form>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<script type="text/javascript" src="data/data.js"></script>
+	<form id="new_person_form">
 		<label for="fname">First name:</label>
 		<input type="text" id="fname" name="fname"><br><br>
 		<label for="lname">Last name:</label>
 		<input type="text" id="lname" name="lname"><br><br>
+		<label for="byear">Birthyear</label>
+		<input type="number" id="byear" name="byear"><br><br>
 		<label for="relationship_type">Relationship:</label>
 		<select name="relationship_type" id="relationship_type">
 			<option value="father">Father</option>
 			<option value="mother">Mother</option>
-			<option value="mother">Child</option>
+			<option value="child">Child</option>
+			<!-- Also here - add spouse as an option -->
 		</select><br><br>
 		<label for="select_relative">Name:</label>
-		<select id="select_relative" class="js-states form-control" />
+		<select id="select_relative" class="js-states form-control" /><br><br>
+		<input type="submit">
 	</form>
-	<!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<!-- Select2 -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+	<p id="testlog">Test text</p>
 
 	<script>
-		var data = {
-			"start": "id1",
-			"persons": {
-				"id1": { "id": "id1", "name": "David Montgomery", "birthyear": 1993, "own_unions": [], "parent_union": "u1" },
-				"id2": { "id": "id2", "name": "Anna Montgomery", "birthyear": 1961, "own_unions": ["u1"] },
-				"id3": { "id": "id3", "name": "Erland Montgomery", "birthyear": 1961, "own_unions": ["u1"] },
-				"id4": { "id": "id4", "name": "Mattias Montgomery", "birthyear": 1990, "own_unions": ["u2"], "parent_union": "u1" },
-				"id5": { "id": "id5", "name": "Kerstin Montgomery", "birthyear": 2020, "own_unions": [], "parent_union": "u2" },
-				"id6": { "id": "id6", "name": "Matilda Montgomery", "birthyear": 1989, "own_unions": ["u2"] },
-				"id7": { "id": "id7", "name": "Valdemar Montgomery", "birthyear": 2022, "own_unions": [], "parent_union": "u2" }
-			},
-			"unions": {
-				"u1": { "id": "u1", "partner": ["id2", "id3"], "children": ["id1", "id4"] },
-				"u2": { "id": "u2", "partner": ["id4", "id6"], "children": ["id5", "id7"] }
-			},
-			"links": [
-				["id2", "u1"],
-				["id3", "u1"],
-				["u1", "id1"],
-				["u1", "id4"],
-				["id4", "u2"],
-				["id6", "u2"],
-				["u2", "id5"],
-				["u2", "id7"]
-			]
-		};
 		var $select_relative = $("#select_relative");
 
 		// Populate options
@@ -65,5 +43,48 @@
 			placeholder: "Type name of relative",
 			allowClear: true
 		});
+
+		function addNewPerson(event) {
+			let firstName = form.elements["fname"].value;
+			let lastName = form.elements["lname"].value;
+			let birthYear = form.elements["byear"].value;
+
+			let relationshipType = form.elements["relationship_type"].value;
+			let relationshipId = form.elements["select_relative"].value;
+
+			let numPersons = Object.keys(data.persons).length;
+			let newId = $`id{numPersons + 1}`;
+
+			// TODO - create the full person here
+
+			let relative = data.persons[relationshipId];
+			let newPerson = { id: newId, name: firstName + " " + lastName, birthyear: birthYear };
+
+			if (relationshipType == "father" || relationshipType == "mother") {
+				if (relative.own_unions.length == 0) {
+					// Add new union for both parent and child
+					let numUnions = Object.keys(data.unions).length;
+					let newUnionId = $`u{numUnions + 1}`;
+					data.unions[newUnionId] = { "id": newUnionId, }
+					// ...and so on
+
+				}
+				//newPerson.parent_union = relative.id;
+			}
+			if (relationshipType == "child") {
+				newPerson.own_unions = relative.id;
+			}
+
+			data.persons[newId] = newPerson;
+
+			testlog.textContent = "Hello and goodbye!" + firstName + lastName + relationshipType + numPersons + relationshipId + birthYear;
+			event.preventDefault();
+		}
+
+		const form = document.getElementById("new_person_form");
+		const testLog = document.getElementById("testlog");
+		form.addEventListener("submit", addNewPerson);
+
+
 	</script>
 </body>
