@@ -14,13 +14,14 @@ Array.prototype.remove = function() {
 };
 
 
-function d3_append_multiline_text(d3element, text, delimiter = "_", css_class = undefined, line_sep = 14,
+function d3_append_multiline_text(d3element, text, delimiter = "_", css_class = undefined, line_sep = 10,
     line_offset = undefined, x = 13, dominant_baseline = "central") {
     // adds a multi-line text label to a d3 element
     if (!text) return;
     const d3text = d3element.append("text")
         .attr("class", css_class)
-        .attr("dominant-baseline", dominant_baseline);
+        .attr("dominant-baseline", dominant_baseline)
+        .attr("transform", "translate(0, 0)");
     const arr = text.split(delimiter);
     if (!line_offset) { line_offset = -line_sep * (arr.length - 1) / 2; }
     if (arr != undefined) {
@@ -28,7 +29,9 @@ function d3_append_multiline_text(d3element, text, delimiter = "_", css_class = 
             d3text.append("tspan")
                 .text(arr[i])
                 .attr("dy", i == 0 ? line_offset : line_sep)
-                .attr("x", x);
+                .attr("x", 0)
+                .attr("y", -30)
+				.style("text-anchor", "middle");
         }
     }
 };
@@ -606,7 +609,7 @@ class FTDrawer {
             .direction('e')
             .offset([0, 5]);
         this.svg.call(this.tip);
-        this.tooltip(FTDrawer.default_tooltip_func);
+		https://github.com/BenPortner/js_family_tree/pull/8   this.tooltip(FTDrawer.default_tooltip_func);
 
         // initialize dag layout maker
         this.layout = d3.sugiyama()
@@ -687,8 +690,8 @@ class FTDrawer {
         var content = `
                 <span style='margin-left: 2.5px;'><b>` + node.get_name() + `</b></span><br>
                 <table style="margin-top: 2.5px;">
-                        <tr><td>born</td><td>` + (node.get_birth_year() || "?") + ` in ` + (node.data.birthplace || "?") + `</td></tr>
-                        <tr><td>died</td><td>` + (node.get_death_year() || "?") + ` in ` + (node.data.deathplace || "?") + `</td></tr>
+                        <tr><td>Born</td><td>` + (node.get_birth_year() || "-") + `</td></tr>
+                        <tr><td>Died</td><td>` + (node.get_death_year() || "-") + `</td></tr>
                 </table>
                 `
         return content.replace(new RegExp("null", "g"), "?");
@@ -711,7 +714,7 @@ class FTDrawer {
         if (node.is_union()) return;
         return node.get_name() +
             FTDrawer.label_delimiter +
-            (node.get_birth_year() || "?") + " - " + (node.get_death_year() || "?");
+            (node.get_birth_year() || " ") + " - " + (node.get_death_year() || " ");
     };
 
     node_label(node_label_func) {
@@ -750,11 +753,12 @@ class FTDrawer {
     static default_link_path_func(s, d) {
         function diagonal(s, d) {
             // Creates a curved (diagonal) path from parent to the child nodes
-            return `M ${s.x} ${s.y}
-            C ${(s.x + d.x) / 2} ${s.y},
-              ${(s.x + d.x) / 2} ${d.y},
+            return `M ${s.x} ${s.y} 
+            C ${s.x} ${(s.y + d.y) / 2},
+              ${d.x} ${(s.y + d.y) / 2},
               ${d.x} ${d.y}`
         }
+
         return diagonal(s, d);
     }
 
@@ -818,7 +822,7 @@ class FTDrawer {
                 d3.select(this),
                 this_object.node_label_func(node),
                 FTDrawer.label_delimiter,
-                "node-label",
+                "node-label"
             )
         });
 
@@ -857,27 +861,25 @@ class FTDrawer {
         var link = this.g.selectAll('path.' + this.link_css_class)
             .data(links, FTDrawer.make_unique_link_id);
 
+        //debugger;
         // Enter any new links at the parent's previous position.
-        var linkEnter = link.enter().insert('path', "g")
+        
+
+        var linkEnter = link
+            .enter()
+            .insert('path', "g")
             .attr("class", this.link_css_class)
             .attr('d', _ => {
                 var o = {
                     x: source.x0,
                     y: source.y0
                 }
-                return this.link_path_func(o, o)
+                return this.link_path_func(o, o);				
             });
+            
 
-        // UPDATE
-        var linkUpdate = linkEnter.merge(link);
-
-        // Transition back to the parent element position
-        linkUpdate.transition()
-            .duration(this.transition_duration())
-            .attr('d', d => this.link_path_func(d.source, d.target));
-
-        // Remove any exiting links
-        var linkExit = link.exit().transition()
+         // Remove any exiting links
+        link.exit().transition()
             .duration(this.transition_duration())
             .attr('d', _ => {
                 var o = {
@@ -887,6 +889,17 @@ class FTDrawer {
                 return this.link_path_func(o, o)
             })
             .remove();
+            
+        // UPDATE
+        var linkUpdate = linkEnter.merge(link);
+
+        // Transition back to the parent element position
+        linkUpdate.transition()
+            .duration(this.transition_duration())
+            .attr('d', d => {
+                let test = this.link_path_func(d.source, d.target);
+                return test;
+            });
 
         // expanding a big subgraph moves the entire dag out of the screen
         // to prevent this, cancel any transformations in y-direction
