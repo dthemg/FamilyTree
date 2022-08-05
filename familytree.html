@@ -26,7 +26,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
 	<script src="js/d3-dag.js"></script>
-	<script src="data/data.js"></script>
+	<!--<script src="data/data.js"></script>-->
+	<script src="data/ancestor.js"></script>
 	<script src="js/familytree.js"></script>
 	<script>
 		// insert svg object to hold the family tree
@@ -39,6 +40,63 @@
 			.orientation("vertical")
 			.transition_duration(0)
 			.node_size(node => node.is_union() ? 0 : 8);
+
+		// Add tree members and relationships
+		const ancestor_union = FT.root.add_own_union({});
+		let marique = ancestor_union.add_child({
+			name: "Marique Bedoire",
+			birthyear: 1661,
+			deathyear: 1712
+		});
+
+		const marique_union = marique.add_own_union({});
+		let magdaleine = marique_union.add_child({
+			name: "Magdeleine Campbell",
+			birthyear: 1688,
+			deathyear: 1761
+		});
+
+		marique_union.add_parent({
+			name: "Jean Bedoire",
+			birthyear: 1658,
+			deathyear: 1721
+		});
+
+		const magdaleine_union = magdaleine.add_own_union({});
+		let anne = magdaleine_union.add_child({
+			name: "Anne Montgomery",
+			birthyear: 1717,
+			deathyear: 1772
+		});
+		magdaleine_union.add_parent({
+			name: "Robert Campbell"
+		})
+
+		const anne_union = anne.add_own_union({});
+		anne_union.add_child({
+			name: "Robert Montgomery",
+			birthyear: 1737,
+			deathyear: 1798
+		})
+		let john = anne_union.add_parent({
+			name: "John Montgomery",
+			birthyear: 1695,
+			deathyear: 1764
+		})
+
+		const john_parent_union = john.add_parent_union({})
+		john_parent_union.add_parent({
+			name: "John Montgomery",
+			deathyear: 1718
+		});
+		let elisabeth = john_parent_union.add_parent({
+			name: "Elisabeth Montgomery"
+		})
+
+		const elisabeth_parent_union = elisabeth.add_parent_union({});
+		elisabeth_parent_union.add_parent({
+			name: "Clark"
+		});
 
 		// draw family tree
 		FT.draw();
