@@ -73,7 +73,7 @@
 		})
 
 		const anne_union = anne.add_own_union({});
-		anne_union.add_child({
+		let robert = anne_union.add_child({
 			name: "Robert Montgomery",
 			birthyear: 1737,
 			deathyear: 1798
@@ -97,6 +97,412 @@
 		elisabeth_parent_union.add_parent({
 			name: "Clark"
 		});
+
+		const robert_union = robert.add_own_union({});
+		let josias = robert_union.add_child({
+			name: "Josias Montgomery-C",
+			birthyear: 1785,
+			deathyear: 1825
+		});
+		let ulla = robert_union.add_parent({
+			name: "Ulla Margareta Montgomery",
+			birthyear: 1758,
+			deathyear: 1833
+		});
+
+		const ulla_parent_union = ulla.add_parent_union({});
+		ulla_parent_union.add_parent({
+			name: "Josias Carl Cederhielm",
+			birthyear: 1734,
+			deathyear: 1795
+		});
+		let catharina = ulla_parent_union.add_parent({
+			name: "Catharina Cederhielm",
+			birthyear: 1733,
+			deathyear: 1816
+		});
+
+		const catharina_parent_union = catharina.add_parent_union({});
+		catharina_parent_union.add_parent({
+			name: "Tigerhielm"
+		});
+
+		const josias_union = josias.add_own_union({});
+		let robert_MC = josias_union.add_child({
+			name: "Robert N G Montgomery-C",
+			birthyear: 1821,
+			deathyear: 1888
+		});
+		let matilda = josias_union.add_parent({
+			name: "Matilda Montgomery-C",
+			birthyear: 1796,
+			deathyear: 1833
+		});
+
+		const matilda_parent_union = matilda.add_parent_union({});
+		matilda_parent_union.add_parent({
+			name: "Nicolas B D'Orozco"
+		});
+		matilda_parent_union.add_parent({
+			name: "Sabina D'Orozco"
+		});
+
+		const robert_MC_union = robert_MC.add_own_union({});
+		let josiasgubbe = robert_MC_union.add_child({
+			name: "Josias Montgomery-C",
+			birthyear: 1862,
+			deathyear: 1955
+		});
+		robert_MC_union.add_child({
+			name: "William Montgomery-C",
+			birthyear: 1861,
+			deathyear: 1921
+		});
+		robert_MC_union.add_child({
+			name: "Robert Montgomery-C",
+			birthyear: 1851,
+			deathyear: 1932
+		});
+		robert_MC_union.add_child({
+			name: "Richard Montgomery-C",
+			birthyear: 1864,
+			deathyear: 1889
+		});
+		robert_MC_union.add_child({
+			name: "Hugo Montgomery-C",
+			birthyear: 1847,
+			deathyear: 1872
+		});
+		robert_MC_union.add_child({
+			name: "Sofie Montgomery-C"
+		});
+		robert_MC_union.add_child({
+			name: "Cecilia Montgomery-C",
+			deathyear: 1873
+		});
+		robert_MC_union.add_child({
+			name: "Margareta Montgomery-C",
+			birthyear: 1865,
+			deathyear: 1929
+		});
+		let cecilia = robert_MC_union.add_parent({
+			name: "Cecilia Montgomery-C",
+			birthyear: 1824,
+			deathyear: 1915
+		});
+
+		const cecilia_parent_union = cecilia.add_parent_union({});
+		let olof = cecilia_parent_union.add_parent({
+			name: "Olof Nordenfeldt",
+			birthyear: 1791,
+			deathyear: 1843
+		});
+		let sofia = cecilia_parent_union.add_parent({
+			name: "Sofia Nordenfeldt",
+			birthyear: 1813,
+			deathyear: 1878
+		});
+
+		const olof_parent_union = olof.add_parent_union({});
+		olof_parent_union.add_parent({
+			name: "Olof G Nordenfeldt",
+			birthyear: 1757,
+			deathyear: 1791
+		});
+		olof_parent_union.add_parent({
+			name: "Christina Nordenfeldt"
+		});
+
+		const sofia_parent_union = sofia.add_parent_union({});
+		sofia_parent_union.add_parent({
+			name: "Leonard Trankell"
+		});
+		sofia_parent_union.add_parent({
+			name: "Britta Trankell"
+		});
+
+		const josiasgubbe_union = josiasgubbe.add_own_union({});
+		josiasgubbe_union.add_child({
+			name: "Hugo Montgomery",
+			birthyear: 1898,
+			deathyear: 1923
+		});
+		josiasgubbe_union.add_child({
+			name: "Richard Montgomery",
+			birthyear: 1896,
+			deathyear: 1977
+		});
+		josiasgubbe_union.add_child({
+			name: "Caroline Montgomery",
+			birthyear: 1899,
+			deathyear: 1987
+		});
+		let robert_junior = josiasgubbe_union.add_child({
+			name: "Robert Montgomery",
+			birthyear: 1894,
+			deathyear: 1975
+		});
+		josiasgubbe_union.add_parent({
+			name: "Ingegerd Montgomery",
+			birthyear: 1913,
+			deathyear: 1996
+		});
+
+		const robert_junior_union = robert_junior.add_own_union({});
+		robert_junior_union.add_child({
+			name: "Cecilia Montgomery",
+			birthyear: 1925,
+			deathyear: 1963
+		});
+		let hugo = robert_junior_union.add_child({
+			name: "Hugo Montgomery",
+			birthyear: 1932
+		});
+
+		const hugo_union = hugo.add_own_union({});
+		hugo_union.add_child({
+			name: "Cecilia Montgomery",
+			birthyear: 1959
+		});
+		hugo_union.add_child({
+			name: "Henrik Montgomery",
+			birthyear: 1966
+		});
+		hugo_union.add_child({
+			name: "Hedvig Montgomery",
+			birthyear: 1968
+		});
+		let erland = hugo_union.add_child({
+			name: "Erland Montgomery",
+			birthyear: 1961
+		});
+		hugo_union.add_parent({
+			name: "Ingun Montgomery",
+			birthyear: 1936
+		});
+
+		const erland_union = erland.add_own_union({});
+		erland_union.add_child({
+			name: "David Montgomery",
+			birthyear: 1993
+		});
+		let mattias = erland_union.add_child({
+			name: "Mattias Montgomery",
+			birthyear: 1990
+		});
+		let anna = erland_union.add_parent({
+			name: "Anna Montgomery",
+			birthyear: 1961
+		});
+
+		const mattias_union = mattias.add_own_union({});
+		mattias_union.add_child({
+			name: "Kerstin Montgomery",
+			birthyear: 2020
+		});
+		mattias_union.add_child({
+			name: "Valdemar Montgomery",
+			birthyear: 2022
+		});
+		mattias_union.add_parent({
+			name: "Matilda Montgomery",
+			birthyear: 1989
+		});
+
+		const anna_parent_union = anna.add_parent_union({});
+		let kerstin = anna_parent_union.add_parent({
+			name: "Kerstin Tunving",
+			birthyear: 1931,
+			deathyear: 1994
+		});
+		let lars_helge = anna_parent_union.add_parent({
+			name: "Lars-Helge Tunving",
+			birthyear: 1926,
+			deathyear: 2007
+		});
+		anna_parent_union.add_child({
+			name: "Katarina Tunving",
+			birthyear: 1957
+		});
+
+		const kerstin_parent_union = kerstin.add_parent_union({});
+		kerstin_parent_union.add_parent({
+			name: "Arvid Persson",
+			birthyear: 1911,
+			deathyear: 1978
+		});
+		kerstin_parent_union.add_parent({
+			name: "Edit Persson",
+			birthyear: 1911,
+			deathyear: 1993
+		});
+
+		const lars_helge_parent_union = lars_helge.add_parent_union({});
+		let robert2 = lars_helge_parent_union.add_parent({
+			name: "Robert Andersson",
+			birthyear: 1885,
+			deathyear: 1969
+		});
+		let signe = lars_helge_parent_union.add_parent({
+			name: "Signe Andersson",
+			birthyear: 1886,
+			deathyear: 1974
+		});
+		lars_helge_parent_union.add_child({
+			name: "Kersin-Maria Tunving",
+			birthyear: 1919
+		});
+		let nils_ludvig = lars_helge_parent_union.add_child({
+			name: "Nils-Ludvig Tunving",
+			birthyear: 1917,
+			deathyear: 1981
+		});
+
+		const nils_ludvig_union = nils_ludvig.add_own_union({});
+		nils_ludvig_union.add_parent({
+			name: "Brita Tunving",
+			birthyear: 1921
+		});
+		nils_ludvig_union.add_child({
+			name: "Gunilla Tunving",
+			birthyear: 1948
+		});
+		nils_ludvig_union.add_child({
+			name: "Eva Tunving",
+			birthyear: 1951
+		});
+		let nils = nils_ludvig_union.add_child({
+			name: "Nils Tunving",
+			birthyear: 1955
+		});
+
+		const nils_union = nils.add_own_union({});
+		nils_union.add_parent({
+			name: "Görel Tunving",
+			birthyear: 1959
+		});
+		nils_union.add_child({
+			name: "Anton Tunving",
+			birthyear: 1987
+		});
+		nils_union.add_child({
+			name: "Hannes Tunving",
+			birthyear: 1991
+		});
+
+		const robert2_parent_union = robert2.add_parent_union({});
+		let sven = robert2_parent_union.add_parent({
+			name: "Sven Carl Andersson",
+			birthyear: 1841,
+			deathyear: 1891
+		});
+		let axelina = robert2_parent_union.add_parent({
+			name: "Axelina Andersson",
+			birthyear: 1848,
+			deathyear: 1929
+		});
+
+		const sven_parent_union = sven.add_parent_union({});
+		sven_parent_union.add_parent({
+			name: "Anders Hansson",
+			birthyear: 1786
+		});
+		sven_parent_union.add_parent({
+			name: "Malena Hansson",
+			birthyear: 1811
+		});
+
+		const axelina_parent_union = axelina.add_parent_union({});
+		axelina_parent_union.add_parent({
+			name: "Bengt Johansson",
+			deathyear: 1895
+		});
+		axelina_parent_union.add_parent({
+			name: "Maria Johansson",
+			deathyear: 1897
+		});
+
+		const signe_parent_union = signe.add_parent_union({});
+		signe_parent_union.add_parent({
+			name: "Nils Pålsson",
+			birthyear: 1851,
+			deathyear: 1938
+		});
+		let johanna = signe_parent_union.add_parent({
+			name: "Johanna Pålsson",
+			birthyear: 1861,
+			deathyear: 1942
+		});
+		signe_parent_union.add_child({
+			name: "Ida Pålsson",
+			birthyear: 1887,
+			deathyear: 1958
+		});
+		signe_parent_union.add_child({
+			name: "Anna Pålsson",
+			birthyear: 1891,
+			deathyear: 1891
+		})
+
+		const johanna_parent_union = johanna.add_parent_union({});
+		let kjersti = johanna_parent_union.add_parent({
+			name: "Kjersti Pehrsdotter",
+			birthyear: 1822,
+			deathyear: 1898
+		});
+		johanna_parent_union.add_parent({
+			name: "Jöns Larsson",
+			birthyear: 1822,
+			deathyear: 1896
+		});
+		johanna_parent_union.add_child({
+			name: "Marie ?",
+			birthyear: 1857,
+			deathyear: 1864
+		});
+		johanna_parent_union.add_child({
+			name: "Ludvig ?",
+			birthyear: 1853,
+			deathyear: 1924
+		});
+		johanna_parent_union.add_child({
+			name: "Per ?",
+			birthyear: 1851,
+			deathyear: 1852
+		});
+
+		const kjersti_parent_union = kjersti.add_parent_union({});
+		kjersti_parent_union.add_parent({
+			name: "Per Månsson",
+			birthyear: 1763,
+			deathyear: 1826
+		});
+		kjersti_parent_union.add_parent({
+			name: "Bengta Andersdotter",
+			birthyear: 1782,
+			deathyear: 1865
+		});
+		kjersti_parent_union.add_child({
+			name: "Hanna Pehrsdotter",
+			birthyear: 1813,
+			deathyear: 1863
+		});
+		kjersti_parent_union.add_child({
+			name: "Måns Pehrsdotter",
+			birthyear: 1815,
+			deathyear: 1878
+		});
+		kjersti_parent_union.add_child({
+			name: "Nils Pehrsdotter",
+			birthyear: 1818,
+			deathyear: 1859
+		});
+		kjersti_parent_union.add_child({
+			name: "Jöns Pehrsdotter",
+			birthyear: 1816,
+			deathyear: 1896
+		});
+
 
 		// draw family tree
 		FT.draw();
